@@ -1,0 +1,14 @@
+{
+    "name": "cbednarski/souschef",
+    "description": "A wrapper for common chef tasks including knife and remote ssh",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Chris Bednarski",
+            "email": "banzaimonkey@gmail.com"
+        }
+    ],
+    "require": {
+
+    }
+}
