@@ -41,6 +41,4 @@ Create `latest.json`:
 
 `sc deploy node hostname.blah.com`: Deploys the specified hostname
 
-#### deploy
-
 `sc deploy environment environment-blue`: Deploys all nodes in the specified environment
