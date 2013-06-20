@@ -2,6 +2,10 @@
 
 souschef is a command-line wrapper for common chef tasks like deploying and updating environment files. It is designed to make [blue-green deployments](http://martinfowler.com/bliki/BlueGreenDeployment.html) very simple, and also has some verb-y wrappers around common knife commands.
 
+## Installation
+
+Clone this repo, then run [`composer install`](http://getcomposer.org/download/) in the souschef folder. Add the `bin/sc` command to your path. When you can run `sc` and see the list of commands (below) you're good to go!
+
 ## Commands
 
 Here are some examples of the commands:
