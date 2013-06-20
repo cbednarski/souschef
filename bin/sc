@@ -8,4 +8,5 @@ $application->add(new cbednarski\souschef\Command\PromoteEnvironment());
 $application->add(new cbednarski\souschef\Command\UpdateEnvironment());
 $application->add(new cbednarski\souschef\Command\DumpEnvironment());
 $application->add(new cbednarski\souschef\Command\Deploy());
+$application->add(new cbednarski\souschef\Command\Bootstrap());
 $application->run();
