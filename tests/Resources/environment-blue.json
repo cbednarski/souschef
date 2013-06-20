@@ -1,0 +1,19 @@
+{
+    "name": "environment-blue",
+    "description": "Hello this is blue",
+    "cookbook_versions": {
+        "nginx": "= 1.3.0",
+        "mysql": "= 3.0.0",
+        "php": "= 1.2.0"
+    },
+    "json_class": "Chef::Environment",
+    "chef_type": "environment",
+    "default_attributes": {
+        "package": {
+            "version": "1.2.3"
+        }
+    },
+    "override_attributes": {
+
+    }
+}
