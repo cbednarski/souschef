@@ -18,14 +18,14 @@ class UpdateEnvironment extends Command
         $this->setDescription('Update the specified environment using a specified, partial environment file');
 
         $this->addArgument('environment', InputArgument::REQUIRED, 'environment to update');
-        $this->addArgument('mergefile', InputArgument::REQUIRED, 'partial file to merge');
+        $this->addArgument('patchfile', InputArgument::REQUIRED, 'patch to apply to the environment');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $mergefile = $input->getArgument('mergefile');
-        if(!is_readable($mergefile)) {
-            throw new \Exception('Unable to read merge file from ' . $mergefile);
+        $patchfile = $input->getArgument('patchfile');
+        if(!is_readable($patchfile)) {
+            throw new \Exception('Unable to read merge file from ' . $patchfile);
         }
 
         $environment = $input->getArgument('environment');
@@ -35,11 +35,11 @@ class UpdateEnvironment extends Command
         $environment_file = "$scdir/$environment.json";
 
         $output->writeln("<info>Updating $environment with:</info>");
-        $output->writeln(file_get_contents($mergefile));
+        $output->writeln(file_get_contents($patchfile));
 
         CliWrapper::execute("knife environment show --format=json $environment > $environment_file");
         $env = Environment::createFromFile($environment_file);
-        $env->mergeFile($mergefile);
+        $env->applyPatchfile($patchfile);
         file_put_contents($environment_file, $env->getDataAsJson());
         CliWrapper::execute("knife environment from file $environment_file");
         unlink($environment_file);

@@ -72,7 +72,7 @@ class Environment
         return is_array($thing) || is_object($thing);
     }
 
-    public function mergeFile($file)
+    public function applyPatchfile($file)
     {
         if (!is_readable($file)) {
             throw new \Exception('Unable to read ' . $file);
