@@ -1,0 +1,18 @@
+<phpunit>
+  <testsuites>
+    <testsuite name="souschef">
+      <directory suffix="Test.php">./tests/cbednarski/souschef/</directory>
+    </testsuite>
+  </testsuites>
+  <filter>
+    <blacklist>
+      <directory suffix=".php">./vendor/</directory>
+    </blacklist>
+    <whitelist processUncoveredFilesFromWhitelist="true">
+      <directory suffix=".php">./cbednarski/souschef/</directory>
+    </whitelist>
+  </filter>
+  <logging>
+    <log type="coverage-text" target="php://stdout" showUncoveredFiles="false"/>
+  </logging>
+</phpunit>
