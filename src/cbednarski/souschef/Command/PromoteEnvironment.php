@@ -30,7 +30,7 @@ class PromoteEnvironment extends Command
 
         $output->writeln("Updating $environment-$other_color to match $environment-$color");
 
-        $scdir = '~/.souschef';
+        $scdir = $_ENV['HOME'] . '/.souschef';
         mkdir($scdir);
 
         // TODO Change this to read from stdout instead of a file to eliminate weirdness with multiple processes
