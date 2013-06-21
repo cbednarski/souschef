@@ -20,18 +20,18 @@ Create `latest.json`:
 
 ```json
 {
-  "cookbook_versions": {
-  	"mysql": "= 0.0.111",
-		"php": "= 0.0.45"
-	},
-	"default_attributes": {
-		"cookbook1": {
-			"version": "1.3.0"
-		},
-		"cookbook3": {
-			"version": "1.5.5"
-		}
-	}
+    "cookbook_versions": {
+        "mysql": "= 3.0.2",
+        "php": "= 1.2.2"
+    },
+    "default_attributes": {
+        "cookbook1": {
+            "version": "1.3.0"
+        },
+        "cookbook3": {
+            "version": "1.5.5"
+        }
+    }
 }
 ```
 
