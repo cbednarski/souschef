@@ -7,6 +7,6 @@ class CliWrapper
 {
     public static function execute($command)
     {
-        return shell_exec($command);
+        return passthru($command);
     }
 }

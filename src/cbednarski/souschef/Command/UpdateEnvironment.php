@@ -31,7 +31,9 @@ class UpdateEnvironment extends Command
         $environment = $input->getArgument('environment');
 
         $scdir = $_SERVER['HOME'] . '/.souschef';
-        mkdir($scdir);
+        if (!is_dir($scdir)) {
+            mkdir($scdir);
+        }
         $environment_file = "$scdir/$environment.json";
 
         $output->writeln("<info>Updating $environment with:</info>");
