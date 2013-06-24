@@ -27,11 +27,6 @@ class Environment
         return self::createFromJson(file_get_contents($file));
     }
 
-    public function __construct()
-    {
-        // hi
-    }
-
     public function merge($data)
     {
         $name = $this->name;
