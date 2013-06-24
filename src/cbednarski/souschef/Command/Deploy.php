@@ -16,14 +16,14 @@ class Deploy extends Command
         $this->setName('deploy');
         $this->setDescription('Deploy a node or all nodes in an environment');
 
-        $this->addArgument('type', InputArgument::REQUIRED, '"environment" or "node"');
+        $this->addArgument('type', InputArgument::REQUIRED, '"environment", "env", or "node"');
         $this->addArgument('deployable', InputArgument::REQUIRED, 'identifier for the thing being deployed');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $type = $input->getArgument('type');
-        if (!in_array($type, array('environment', 'node'))) {
+        if (!in_array($type, array('environment', 'env', 'node'))) {
             throw new \DomainException('I can only deploys nodes and environments');
         }
 
