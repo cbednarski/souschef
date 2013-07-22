@@ -20,6 +20,7 @@ class Ssh extends Command
         $this->addOption('ipaddress', 'i', InputOption::VALUE_REQUIRED, "Ssh into a node by IP address.");
         $this->addOption('environment', 'e', InputOption::VALUE_REQUIRED, "Ssh into all nodes in an environment.");
         $this->addOption('command', 'c', InputOption::VALUE_REQUIRED, "Which command to run.", 'cssh');
+        $this->addOption('user', 'u', InputOption::VALUE_REQUIRED, "Run ssh as this user.");
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -29,12 +30,19 @@ class Ssh extends Command
         $name = $input->getOption('name');
         $ipaddress = $input->getOption('ipaddress');
 
+        $args = " -a ipaddress ";
+
+        $user = $input->getOption('user');
+        if ($user) {
+            $args .= " -x $user ";
+        }
+
         if (!empty($environment)) {
-            CliWrapper::execute("knife ssh 'chef_environment:$environment' $command");
+            CliWrapper::execute("knife ssh $args 'chef_environment:$environment' $command");
         } elseif (!empty($name)) {
-            CliWrapper::execute("knife ssh 'name:$name' $command");
+            CliWrapper::execute("knife ssh $args 'name:$name' $command");
         } elseif (!empty($ipaddress)) {
-            CliWrapper::execute("knife ssh 'ipaddress:$name' $command");
+            CliWrapper::execute("knife ssh $args 'ipaddress:$name' $command");
         } else {
             throw new \InvalidArgumentException("You need to specify an environment, name, or ip.");
         }
