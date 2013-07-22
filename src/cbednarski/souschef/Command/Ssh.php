@@ -33,6 +33,9 @@ class Ssh extends Command
         $args = " -a ipaddress ";
 
         $user = $input->getOption('user');
+        if (!$user) {
+            $user = getenv('SC_SSH_USERNAME');
+        }
         if ($user) {
             $args .= " -x $user ";
         }
