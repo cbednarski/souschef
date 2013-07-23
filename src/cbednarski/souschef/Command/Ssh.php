@@ -38,11 +38,11 @@ class Ssh extends Command
         }
 
         if (!empty($environment)) {
-            CliWrapper::execute("knife ssh $args 'chef_environment:$environment' $command");
+            CliWrapper::execute("knife ssh $args 'chef_environment:$environment' '$command'");
         } elseif (!empty($name)) {
-            CliWrapper::execute("knife ssh $args 'name:$name' $command");
+            CliWrapper::execute("knife ssh $args 'name:$name' '$command'");
         } elseif (!empty($ipaddress)) {
-            CliWrapper::execute("knife ssh $args 'ipaddress:$name' $command");
+            CliWrapper::execute("knife ssh $args 'ipaddress:$name' '$command'");
         } else {
             throw new \InvalidArgumentException("You need to specify an environment, name, or ip.");
         }
