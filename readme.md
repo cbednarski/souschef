@@ -54,3 +54,6 @@ Create `latest.json`:
 `sc ssh -n environment_name`: opens cssh to boxes by name
 
 `sc ssh -e environment_name -u username -c command`: runs an arbitrary `command` on all boxes under a given environment, logging in as the user `username`
+
+If you set the environment variable `SC_SSH_USERNAME`, souschef will use that value as the username unless an option
+with -u is used to override that value.
