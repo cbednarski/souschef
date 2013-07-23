@@ -63,6 +63,42 @@ class Environment
         return $thing1;
     }
 
+    public function diff($data) {
+        $originalData = $this->getDataAsJson();
+        $mergedData = self::nestedObjectMerge($this->data, json_decode($data));
+        return self::nestedObjectDiff(json_decode($originalData), $mergedData);
+    }
+
+    public static function nestedObjectDiff($thing1, $thing2)
+    {
+
+        $diff = "";
+        foreach((array) $thing2 as $key => $var) {
+            if(is_array($thing1)) {
+                if(self::isArrayish($var)) {
+                    $diff .= self::nestedObjectDiff($thing1[$key], $var);
+                } else {
+                    if ($thing1[$key] != $var) {
+                        $diff .= "< '$key': '{$thing1[$key]}'\n";
+                        $diff .= "> '$key': '{$var}''\n";
+                    }
+                }
+                $diff .= self::nestedObjectDiff($thing1[$key], $var);
+            } elseif (is_object($thing1)) {
+                if(self::isArrayish($var)) {
+                    $diff .= self::nestedObjectDiff($thing1->$key, $var);
+                } else {
+                    if ($thing1->$key != $var) {
+                        $diff .= "< '$key': '{$thing1->$key}'\n";
+                        $diff .= "> '$key': '{$var}'\n";
+                    }
+                }
+            }
+        }
+
+        return $diff;
+    }
+
     public static function isArrayish($thing) {
         return is_array($thing) || is_object($thing);
     }
@@ -75,6 +111,16 @@ class Environment
 
         return self::merge(file_get_contents($file));
     }
+
+    public function getDiffFromFile($file)
+    {
+        if (!is_readable($file)) {
+            throw new \Exception('Unable to read ' . $file);
+        }
+
+        return self::diff(file_get_contents($file));
+    }
+
 
     /**
      * @return mixed
