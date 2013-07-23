@@ -20,7 +20,7 @@ class Ssh extends Command
         $this->addOption('ipaddress', 'i', InputOption::VALUE_REQUIRED, "Ssh into a node by IP address.");
         $this->addOption('environment', 'e', InputOption::VALUE_REQUIRED, "Ssh into all nodes in an environment.");
         $this->addOption('command', 'c', InputOption::VALUE_REQUIRED, "Which command to run.", 'cssh');
-        $this->addOption('user', 'u', InputOption::VALUE_REQUIRED, "Run ssh as this user.");
+        $this->addOption('user', 'u', InputOption::VALUE_REQUIRED, "Run ssh as this user.", (getenv('SC_SSH_USERNAME') ?: null));
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -33,9 +33,6 @@ class Ssh extends Command
         $args = " -a ipaddress ";
 
         $user = $input->getOption('user');
-        if (!$user) {
-            $user = getenv('SC_SSH_USERNAME');
-        }
         if ($user) {
             $args .= " -x $user ";
         }
