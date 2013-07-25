@@ -69,28 +69,28 @@ class Environment
         return self::nestedObjectDiff(json_decode($originalData), $mergedData);
     }
 
-    public static function nestedObjectDiff($thing1, $thing2)
+    public static function nestedObjectDiff($thing1, $thing2, $pre = "")
     {
 
         $diff = "";
         foreach((array) $thing2 as $key => $var) {
             if(is_array($thing1)) {
                 if(self::isArrayish($var)) {
-                    $diff .= self::nestedObjectDiff($thing1[$key], $var);
+                    $diff .= self::nestedObjectDiff($thing1[$key], $var, "$pre$key.");
                 } else {
                     if ($thing1[$key] != $var) {
-                        $diff .= "< '$key': '{$thing1[$key]}'\n";
-                        $diff .= "> '$key': '{$var}''\n";
+                        $diff .= "< $pre$key: '{$thing1[$key]}'\n";
+                        $diff .= "> $pre$key: '{$var}''\n";
                     }
                 }
-                $diff .= self::nestedObjectDiff($thing1[$key], $var);
+                $diff .= self::nestedObjectDiff($thing1[$key], $var, "$pre$key.");
             } elseif (is_object($thing1)) {
                 if(self::isArrayish($var)) {
-                    $diff .= self::nestedObjectDiff($thing1->$key, $var);
+                    $diff .= self::nestedObjectDiff($thing1->$key, $var, "$pre$key.");
                 } else {
                     if ($thing1->$key != $var) {
-                        $diff .= "< '$key': '{$thing1->$key}'\n";
-                        $diff .= "> '$key': '{$var}'\n";
+                        $diff .= "< $pre$key: '{$thing1->$key}'\n";
+                        $diff .= "> $pre$key: '{$var}'\n";
                     }
                 }
             }
