@@ -51,7 +51,11 @@ Create `latest.json`:
 
 `sc ssh -e environment_name`: opens cssh to all the boxes within an environment
 
-`sc ssh -n environment_name`: opens cssh to boxes by name
+`sc ssh -n node_name`: opens cssh to boxes by name
+
+`sc ssh -i ip_address`: opens cssh to boxes by ip
+
+`sc ssh -r recipe`: opens cssh to boxes with a given recipe in their run list
 
 `sc ssh -e environment_name -u username -c command`: runs an arbitrary `command` on all boxes under a given environment, logging in as the user `username`
 
