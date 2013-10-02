@@ -57,6 +57,8 @@ Create `latest.json`:
 
 `sc ssh -r recipe`: opens cssh to boxes with a given recipe in their run list
 
+`sc ssh -e environment_name -r recipe`: opens cssh to all the boxes within an environment that have a given recipe
+
 `sc ssh -e environment_name -u username -c command`: runs an arbitrary `command` on all boxes under a given environment, logging in as the user `username`
 
 If you set the environment variable `SC_SSH_USERNAME`, souschef will use that value as the username unless an option
