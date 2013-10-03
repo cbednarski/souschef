@@ -10,4 +10,5 @@ $application->add(new cbednarski\souschef\Command\DumpEnvironment());
 $application->add(new cbednarski\souschef\Command\Deploy());
 $application->add(new cbednarski\souschef\Command\Bootstrap());
 $application->add(new cbednarski\souschef\Command\Ssh());
+$application->add(new cbednarski\souschef\Command\ListEnvironment());
 $application->run();
